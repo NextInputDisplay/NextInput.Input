@@ -8,8 +8,8 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        InputBackendManager.RegisterInputBackend<SFMLInputBackend>();
         InputBackendManager.RegisterInputBackend<SDLInputBackend>();
+        InputBackendManager.RegisterInputBackend<SFMLInputBackend>();
         
         IInputBackend backend = InputBackendManager.GetInputBackend();
 
@@ -31,10 +31,17 @@ internal class Program
         
         Thread.Sleep(2000);
 
+        int refreshCount = 0;
+        
         while (true)
         {
             Console.Clear();
             backend.UpdateJoysticks();
+            
+            Console.WriteLine(refreshCount);
+            if (!joysticks[0].IsConnected)
+                break;
+            
             var axes = joysticks[0].GetAxes();
             for (var i = 0; i < axes.Length; i++)
                 Console.WriteLine($"axis {i}: {axes[i]}");
@@ -48,7 +55,19 @@ internal class Program
                 Console.WriteLine($"hats {i}: {hats[i]}");
             
             Thread.Sleep(33);
+            refreshCount++;
         }
+
+        backend.DisposeJoystick(joysticks[0]);
+        Console.WriteLine("Joystick was disconnected");
         
+        // 5 seconds to test and reconnect your joystick to see if it is still picked up
+        Thread.Sleep(5000);
+        
+        backend.UpdateJoysticks();
+        foreach (JoystickDeviceInformation joystickDeviceInformation in backend.Joysticks)
+        {
+            Console.WriteLine(joystickDeviceInformation.DeviceName);
+        }
     }
 }

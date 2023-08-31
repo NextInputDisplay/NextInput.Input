@@ -4,7 +4,7 @@ namespace NextInput.Input.SFML;
 
 public class SFMLJoystick : IJoystick
 {
-    private uint _joystickIndex;
+    internal uint _joystickIndex;
     
     internal SFMLJoystick(uint joystickIndex, SFMLJoystickDeviceInformation deviceInformation)
     {
@@ -13,6 +13,7 @@ public class SFMLJoystick : IJoystick
     }
     
     public JoystickDeviceInformation DeviceInformation { get; }
+    public bool IsConnected => Joystick.IsConnected(_joystickIndex);
     public bool GetButton(int buttonIndex) => Joystick.IsButtonPressed(_joystickIndex, (uint)buttonIndex);
 
     public bool[] GetButtons()

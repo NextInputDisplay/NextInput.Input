@@ -65,6 +65,7 @@ public class SDLInputBackend : IInputBackend
     }
     
     public void UpdateJoysticks() => SDL_JoystickUpdate();
+    public void DisposeJoystick(IJoystick joystick) => SDL_JoystickClose(((SDLJoystick)joystick).JoystickPtr);
 
     public IGameController GetGameController(GameControllerDeviceInformation gameControllerToOpen)
     {

@@ -20,6 +20,7 @@ public interface IInputBackend
 
     public IJoystick GetJoystick(JoystickDeviceInformation joystickToOpen);
     public void UpdateJoysticks();
+    public void DisposeJoystick(IJoystick joystick);
     public IGameController GetGameController(GameControllerDeviceInformation gameControllerToOpen);
     public IMouse GetMouse(MouseDeviceInformation mouseToOpen);
     public IKeyboard GetKeyboard(KeyboardDeviceInformation keyboardToOpen);

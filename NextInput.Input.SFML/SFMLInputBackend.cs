@@ -69,6 +69,11 @@ public class SFMLInputBackend : IInputBackend
         Joystick.Update();
     }
 
+    public void DisposeJoystick(IJoystick joystick)
+    {
+        ((SFMLJoystick)joystick)._joystickIndex = uint.MaxValue;
+    }
+
     public IGameController GetGameController(GameControllerDeviceInformation gameControllerToOpen)
     {
         throw new NotSupportedException("The SFML Input Backend does not support game controllers");

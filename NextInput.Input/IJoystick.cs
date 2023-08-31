@@ -6,6 +6,8 @@ public interface IJoystick
 {
     public JoystickDeviceInformation DeviceInformation { get; }
 
+    public bool IsConnected { get; }
+
     public bool GetButton(int buttonIndex);
     
     public bool[] GetButtons();

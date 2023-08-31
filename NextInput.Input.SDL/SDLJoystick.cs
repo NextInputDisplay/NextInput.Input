@@ -5,18 +5,19 @@ namespace NextInput.Input.SDL;
 
 public class SDLJoystick : IJoystick
 {
-    private IntPtr _joystickPtr;
+    internal IntPtr JoystickPtr;
     
     internal SDLJoystick(int joystickIndex, JoystickDeviceInformation deviceInformation)
     {
         DeviceInformation = deviceInformation;
 
-        _joystickPtr = SDL_JoystickOpen(joystickIndex);
+        JoystickPtr = SDL_JoystickOpen(joystickIndex);
     }
     
     public JoystickDeviceInformation DeviceInformation { get; }
-    
-    public bool GetButton(int buttonIndex) => SDL_JoystickGetButton(_joystickPtr, buttonIndex) == 1;
+    public bool IsConnected => SDL_JoystickGetAttached(JoystickPtr) == SDL_bool.SDL_TRUE;
+
+    public bool GetButton(int buttonIndex) => SDL_JoystickGetButton(JoystickPtr, buttonIndex) == 1;
 
     public bool[] GetButtons()
     {
@@ -28,7 +29,7 @@ public class SDLJoystick : IJoystick
         return buttons;
     }
 
-    public float GetAxis(int axisIndex) => Convert.ToAxis(SDL_JoystickGetAxis(_joystickPtr, axisIndex));
+    public float GetAxis(int axisIndex) => Convert.ToAxis(SDL_JoystickGetAxis(JoystickPtr, axisIndex));
 
     public float[] GetAxes()
     {
@@ -42,7 +43,7 @@ public class SDLJoystick : IJoystick
 
     public JoystickHatDirection GetHat(int hatIndex)
     {
-        return SDL_JoystickGetHat(_joystickPtr, hatIndex) switch
+        return SDL_JoystickGetHat(JoystickPtr, hatIndex) switch
         {
             SDL_HAT_CENTERED => JoystickHatDirection.Centered,
             SDL_HAT_UP => JoystickHatDirection.Up,
@@ -69,7 +70,7 @@ public class SDLJoystick : IJoystick
 
     public JoystickBallState GetBall(int ballIndex)
     {
-        int result = SDL_JoystickGetBall(_joystickPtr, ballIndex, out int deltaX, out int deltaY);
+        int result = SDL_JoystickGetBall(JoystickPtr, ballIndex, out int deltaX, out int deltaY);
         return new JoystickBallState(result, deltaX, deltaY);
     }
 
@@ -85,6 +86,6 @@ public class SDLJoystick : IJoystick
 
     internal void Close()
     {
-        SDL_JoystickClose(_joystickPtr);
+        SDL_JoystickClose(JoystickPtr);
     }
 }
