@@ -22,6 +22,7 @@ public interface IInputBackend
     public void UpdateJoysticks();
     public void DisposeJoystick(IJoystick joystick);
     public IGameController GetGameController(GameControllerDeviceInformation gameControllerToOpen);
+    public void UpdateGameControllers();
     public IMouse GetMouse(MouseDeviceInformation mouseToOpen);
     public IKeyboard GetKeyboard(KeyboardDeviceInformation keyboardToOpen);
 }
