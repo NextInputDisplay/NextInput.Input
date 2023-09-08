@@ -79,7 +79,7 @@ public class SDLInputBackend : IInputBackend
 
         for (int i = 0; i < gameControllersNumber; i++)
         {
-            IntPtr controllerPtr = SDL_GameControllerOpen(0);
+            IntPtr controllerPtr = SDL_GameControllerOpen(i);
 
             if (controllerPtr != IntPtr.Zero)
             {
@@ -109,8 +109,8 @@ public class SDLInputBackend : IInputBackend
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        GameControllerButtons supportedButtons = 0;
-        GameControllerAxes supportedAxes = 0;
+        GameControllerButtons supportedButtons = GameControllerButtons.None;
+        GameControllerAxes supportedAxes = GameControllerAxes.None;
 
         foreach (SDL_GameControllerButton sdlButton in Enum.GetValues<SDL_GameControllerButton>())
         {
@@ -135,10 +135,18 @@ public class SDLInputBackend : IInputBackend
     
     public IGameController GetGameController(GameControllerDeviceInformation gameControllerToOpen)
     {
-        throw new NotImplementedException("TODO!");
+        List<GameControllerDeviceInformation> gameControllers = GetGameControllersDeviceInformation().ToList();
+
+        for (int i = 0; i < gameControllers.Count; i++)
+            if (gameControllers[i] == gameControllerToOpen)
+                return new SDLGameController(i, gameControllers[i]);
+
+        throw new Exception("Controller was disconnected?");
     }
 
     public void UpdateGameControllers() => SDL_GameControllerUpdate();
+    
+    public void DisposeGameController(IGameController gameController) => SDL_GameControllerClose(((SDLGameController)gameController).GameControllerPtr);
 
     public IMouse GetMouse(MouseDeviceInformation mouseToOpen)
     {

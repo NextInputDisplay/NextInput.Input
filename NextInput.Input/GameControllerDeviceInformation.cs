@@ -42,4 +42,32 @@ public class GameControllerDeviceInformation : IDeviceInformation
         SupportedButtons = supportedButtons;
         SupportedAxes = supportedAxes;
     }
+    
+    /// <summary>
+    /// Checks whether the 2 <see cref="GameControllerDeviceInformation"/> are equal
+    /// </summary>
+    /// <param name="first">The first object to compare</param>
+    /// <param name="second">The second object to compare</param>
+    /// <returns>Whether the two <see cref="GameControllerDeviceInformation"/> are equal</returns>
+    public static bool operator ==(GameControllerDeviceInformation? first, GameControllerDeviceInformation? second)
+    {
+        if (first is null || second is null)
+            return first is null && second is null;
+
+        return first.DeviceName == second.DeviceName &&
+               first.DeviceType == second.DeviceType &&
+               first.SupportedAxes == second.SupportedAxes &&
+               first.SupportedButtons == second.SupportedButtons;
+    }
+
+    /// <summary>
+    /// Checks whether the 2 <see cref="GameControllerDeviceInformation"/> are not equal
+    /// </summary>
+    /// <param name="first">The first object to compare</param>
+    /// <param name="second">The second object to compare</param>
+    /// <returns>Whether the two <see cref="GameControllerDeviceInformation"/> are not equal</returns>
+    public static bool operator !=(GameControllerDeviceInformation? first, GameControllerDeviceInformation? second)
+    {
+        return !(first == second);
+    }
 }

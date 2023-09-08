@@ -83,6 +83,11 @@ public interface IInputBackend
     /// Frequently called method that can be used to refresh the <see cref="IGameController"/>'s state / values
     /// </summary>
     public void UpdateGameControllers();
+    /// <summary>
+    /// Method called to dispose of the <see cref="IGameController"/> resources
+    /// </summary>
+    /// <param name="gameController">The <see cref="IGameController"/> instance to be disposed</param>
+    public void DisposeGameController(IGameController gameController);
     
     /// <summary>
     /// Get a <see cref="IMouse"/> instance with the provided <paramref name="mouseToOpen"/>

@@ -13,6 +13,10 @@ public enum GameControllerAxes
     /// </summary>
     Unknown = 1 << 31,
     /// <summary>
+    /// Represents no axis
+    /// </summary>
+    None = 0,
+    /// <summary>
     /// Represents the X axis on the left stick
     /// </summary>
     LeftX = 1 << 0,

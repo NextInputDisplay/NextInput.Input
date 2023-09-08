@@ -83,6 +83,11 @@ public class SFMLInputBackend : IInputBackend
     {
         throw new NotSupportedException("The SFML Input Backend does not support game controllers");
     }
+    
+    public void DisposeGameController(IGameController gameController)
+    {
+        throw new NotSupportedException("The SFML Input Backend does not support game controllers");
+    }
 
     public IMouse GetMouse(MouseDeviceInformation mouseToOpen)
     {

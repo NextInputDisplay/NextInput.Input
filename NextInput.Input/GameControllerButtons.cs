@@ -13,6 +13,10 @@ public enum GameControllerButtons
     /// </summary>
     Unknown = 1 << 31,
     /// <summary>
+    /// Represents no button
+    /// </summary>
+    None = 0,
+    /// <summary>
     /// Represents the A face button
     /// </summary>
     A = 1 << 0,
