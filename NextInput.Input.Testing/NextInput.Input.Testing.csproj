@@ -9,9 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NextInput.Input.SDL\NextInput.Input.SDL.csproj" />
-      <ProjectReference Include="..\NextInput.Input.SFML\NextInput.Input.SFML.csproj" />
-      <ProjectReference Include="..\NextInput.Input\NextInput.Input.csproj" />
+      <PackageReference Include="NextInput.Input.SDL" Version="1.0.0" />
+      <PackageReference Include="NextInput.Input.SFML" Version="1.0.0" />
     </ItemGroup>
 
 </Project>
