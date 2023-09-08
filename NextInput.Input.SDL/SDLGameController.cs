@@ -68,8 +68,13 @@ public class SDLGameController : IGameController
         return buttons;
     }
 
-    public float GetAxis(GameControllerAxes axis) => 
-        Convert.ToAxis(SDL_GameControllerGetAxis(GameControllerPtr, axis.ToSDLGameControllerAxis()));
+    public float GetAxis(GameControllerAxes axis)
+    {
+        if (axis is GameControllerAxes.TriggerLeft or GameControllerAxes.TriggerRight)
+            return Convert.ToAxis(SDL_GameControllerGetAxis(GameControllerPtr, axis.ToSDLGameControllerAxis()), 0, short.MaxValue);
+        
+        return Convert.ToAxis(SDL_GameControllerGetAxis(GameControllerPtr, axis.ToSDLGameControllerAxis()));
+    }
 
     public List<(GameControllerAxes Axis, float Value)> GetAllAxes()
     {
