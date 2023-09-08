@@ -5,6 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Description>The SDL Input backend for NextInput</Description>
+        <Version>0.1.0-alpha</Version>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/NextInputDisplay/NextInput.Input/</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="NextInput.Input" Version="1.0.0" />
+      <PackageReference Include="NextInput.Input" Version="0.1.0-alpha" />
     </ItemGroup>
 
 </Project>

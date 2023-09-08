@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="NextInput.Input.SDL" Version="1.0.0" />
-      <PackageReference Include="NextInput.Input.SFML" Version="1.0.0" />
+      <PackageReference Include="NextInput.Input.SDL" Version="0.1.0-alpha" />
+      <PackageReference Include="NextInput.Input.SFML" Version="0.1.0-alpha" />
     </ItemGroup>
 
 </Project>
